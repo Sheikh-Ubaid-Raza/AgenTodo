@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add .claude/commands/sp.adr.md)",
+      "Bash(git add .claude/commands/sp.analyze.md)",
+      "Bash(git commit -m \"feat: add analyze slash command configuration\")",
+      "Bash(git add .claude/commands/sp.checklist.md)",
+      "Bash(curl -s http://localhost:8000/openapi.json)",
+      "Bash(npm run build:*)",
+      "Bash(curl:*)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:kagent.dev)",
+      "WebSearch",
+      "WebFetch(domain:docs.dapr.io)",
+      "WebFetch(domain:strimzi.io)",
+      "mcp__context7__query-docs"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
