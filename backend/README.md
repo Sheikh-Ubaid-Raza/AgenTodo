@@ -2,7 +2,7 @@
 title: AgenTodo Backend
 emoji: 🚀
 colorFrom: blue
-colorTo: slate
+colorTo: gray
 sdk: docker
 pinned: false
 app_port: 7860
