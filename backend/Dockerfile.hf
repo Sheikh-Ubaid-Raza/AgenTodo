@@ -1,20 +1,21 @@
 # Hugging Face Spaces Dockerfile (port 7860)
-# Optimized single-stage build to stay within HF free tier memory limits.
+# Optimized for HF free tier: uses uv for fast installs, minimal image.
 # The original Dockerfile remains unchanged for Minikube / Helm deployments.
 
-FROM python:3.13-slim
+FROM python:3.12-slim
 WORKDIR /app
 
-# Runtime dependency for psycopg2-binary
+# Install uv for fast dependency resolution + libpq for psycopg2-binary
 RUN apt-get update && \
     apt-get install -y --no-install-recommends libpq5 && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    pip install --no-cache-dir uv
 
-# Install production dependencies only (no gcc needed, using psycopg2-binary)
+# Install production dependencies via uv
 COPY requirements.hf.txt .
-RUN pip install --no-cache-dir -r requirements.hf.txt
+RUN uv pip install --system --no-cache -r requirements.hf.txt
 
-# Copy application code
+# Copy application code only (no tests, no config files)
 COPY app/ ./app/
 
 # Create non-root user (HF Spaces requirement)
@@ -24,7 +25,6 @@ RUN addgroup --system --gid 1001 appgroup && \
 
 USER appuser
 
-# HF Spaces requires port 7860
 EXPOSE 7860
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860"]

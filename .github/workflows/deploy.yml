@@ -29,8 +29,15 @@ jobs:
           cd hf-space
           find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
 
-          # Copy backend/ contents to HF space root
-          cp -r ../backend/* .
+          # Sync backend/ to HF space root, excluding non-production files
+          rsync -a --exclude='tests/' \
+                   --exclude='__pycache__/' \
+                   --exclude='.pytest_cache/' \
+                   --exclude='.env' \
+                   --exclude='.env.*' \
+                   --exclude='history/' \
+                   --exclude='specs/' \
+                   ../backend/ .
 
           # Use the HF-specific Dockerfile and requirements
           cp Dockerfile.hf Dockerfile
