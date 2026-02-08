@@ -15,7 +15,16 @@
       "WebSearch",
       "WebFetch(domain:docs.dapr.io)",
       "WebFetch(domain:strimzi.io)",
-      "mcp__context7__query-docs"
+      "mcp__context7__query-docs",
+      "Bash(bash:*)",
+      "Bash(git fetch --all --prune)",
+      "Bash(find:*)",
+      "Bash(pip install --break-system-packages pydantic-core)",
+      "Bash(python3 -c \"from app.main import app; print(''Import successful! App title:'', app.title)\")",
+      "Bash(python3 -m uvicorn app.main:app --reload)",
+      "Bash(pkill -f uvicorn)",
+      "Bash(npx update-browserslist-db@latest:*)",
+      "Bash(python -c:*)"
     ],
     "deny": [],
     "ask": []

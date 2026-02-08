@@ -1,0 +1,15 @@
+AgenTodo has been deployed!
+
+Components:
+  - Backend (FastAPI):  {{ include "agentodo.fullname" . }}-backend
+  - Frontend (Next.js): {{ include "agentodo.fullname" . }}-frontend
+
+To access the application, run these port-forward commands:
+
+  kubectl port-forward svc/{{ include "agentodo.fullname" . }}-backend 8000:8000 &
+  kubectl port-forward svc/{{ include "agentodo.fullname" . }}-frontend 3000:3000 &
+
+Then visit:
+  - Frontend: http://localhost:3000
+  - Backend API: http://localhost:8000
+  - Health check: http://localhost:8000/health

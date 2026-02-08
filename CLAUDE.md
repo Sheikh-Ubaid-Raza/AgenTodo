@@ -208,3 +208,52 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Reusable Intelligence (Agents & Skills)
+
+### Available Agents
+
+| Agent | Purpose | When to Use |
+|-------|---------|-------------|
+| `authentication-specialist` | Better Auth + JWT for TS/Python | Auth setup, JWT verification, protected routes |
+| `backend-expert` | FastAPI + SQLModel + JWT | API endpoints, database integration, Python backend |
+| `frontend-expert` | Next.js 16 + React + TypeScript | UI components, Server/Client Components, proxy.ts |
+| `database-expert` | SQLModel + Neon PostgreSQL | Schema design, migrations, queries, relationships |
+| `fullstack-architect` | System architecture | API contracts, data flow, integration patterns |
+| `python-debugger` | Python debugging | Test failures, root cause analysis |
+| `python-code-reviewer` | Python code review | Best practices, security, maintainability |
+| `context-sentinel` | Documentation retrieval | Fetching official library docs |
+| `ui-ux-expert` | UI/UX design | shadcn/ui components, accessibility, styling |
+
+### Available Skills
+
+| Skill | Purpose |
+|-------|---------|
+| `better-auth-ts` | TypeScript/Next.js authentication patterns |
+| `better-auth-python` | FastAPI JWT verification and protected routes |
+| `fastapi` | FastAPI routing, dependencies, and patterns |
+| `sqlmodel` | SQLModel ORM for Python database operations |
+| `nextjs` | Next.js 16 App Router and proxy.ts patterns |
+| `neon-postgres` | Neon PostgreSQL serverless configuration |
+| `tailwind-css` | Tailwind CSS utility patterns |
+| `shadcn` | shadcn/ui component library |
+| `context7-documentation-retrieval` | MCP-based documentation retrieval |
+
+### Usage
+
+Agents are automatically invoked by Claude Code when tasks match their description. Skills provide reference patterns and templates that agents consult during implementation.
+
+**Key integration patterns for this project:**
+1. **Auth Flow**: Better Auth (Next.js) → JWT token → FastAPI verification
+2. **Data Layer**: SQLModel models → Neon PostgreSQL
+3. **Frontend**: Next.js Server Components → proxy.ts protection → Client Components
+
+## Active Technologies
+- Python 3.11, TypeScript/JavaScript (Node.js) + Better Auth (TS/JS), FastAPI, python-jose[cryptography], pydantic-settings, SQLModel (003-auth-bridge)
+- PostgreSQL (via Neon), JWT tokens stored client-side (003-auth-bridge)
+- TypeScript/JavaScript (Node.js) for frontend, Python 3.11 for backend + Next.js 16+ (App Router), Better Auth, Tailwind CSS, Lucide React, FastAPI, SQLModel, Neon PostgreSQL (001-frontend-auth-integration)
+- Neon PostgreSQL database via SQLModel ORM (001-frontend-auth-integration)
+- Python 3.11 + FastAPI, SQLModel, OpenAI Agents SDK, Official MCP SDK, Neon PostgreSQL (001-ai-backend)
+
+## Recent Changes
+- 003-auth-bridge: Added Python 3.11, TypeScript/JavaScript (Node.js) + Better Auth (TS/JS), FastAPI, python-jose[cryptography], pydantic-settings, SQLModel

@@ -1,0 +1,16 @@
+{
+  "name": "AgenTodo - AI-Powered Task Management",
+  "short_name": "AgenTodo",
+  "description": "The intelligent task management platform powered by AI. Stay organized, boost productivity, and let AI help you manage your todos effortlessly.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#0c1e3e",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48 32x32 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

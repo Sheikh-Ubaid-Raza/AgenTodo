@@ -1,0 +1,455 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* AgenTodo Premium Theme - Cyber Slate */
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 13%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 47% 13%;
+  --popover-foreground: 210 40% 98%;
+
+  /* Primary: Bright Cyan (#38fbdb) */
+  --primary: 170 96% 60%;
+  --primary-foreground: 222 47% 11%;
+
+  /* Secondary: Slate (#687387) */
+  --secondary: 220 14% 47%;
+  --secondary-foreground: 210 40% 98%;
+
+  /* Muted: Dark Slate */
+  --muted: 222 47% 18%;
+  --muted-foreground: 215 20% 65%;
+
+  /* Accent: Neon Magenta (#fc0ff5) */
+  --accent: 302 97% 52%;
+  --accent-foreground: 210 40% 98%;
+
+  /* Tertiary: Purple (#8e52f5) */
+  --tertiary: 262 90% 70%;
+  --tertiary-foreground: 210 40% 98%;
+
+  /* Destructive */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  /* Borders and inputs */
+  --border: 220 14% 30%;
+  --input: 220 14% 25%;
+  --ring: 170 96% 60%;
+  --radius: 0.75rem;
+
+  /* Custom Cyber Slate gradient colors */
+  --gradient-start: 170 96% 60%;
+  --gradient-mid: 262 90% 70%;
+  --gradient-end: 302 97% 52%;
+
+  /* Status colors */
+  --success: 142 76% 46%;
+  --success-foreground: 210 40% 98%;
+  --warning: 38 92% 50%;
+  --warning-foreground: 222 47% 11%;
+}
+
+/* Light mode (optional override) */
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 170 96% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 20% 85%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 215 20% 93%;
+    --muted-foreground: 220 14% 47%;
+
+    --accent: 302 97% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --tertiary: 262 90% 60%;
+    --tertiary-foreground: 0 0% 100%;
+
+    --border: 215 20% 85%;
+    --input: 215 20% 90%;
+    --ring: 170 96% 40%;
+  }
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Premium Cyber Slate Gradient Utilities */
+@layer utilities {
+  .gradient-cyber {
+    background: linear-gradient(135deg, #38fbdb 0%, #8e52f5 50%, #fc0ff5 100%);
+  }
+
+  .gradient-cyber-subtle {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.15) 0%, hsl(var(--accent) / 0.15) 100%);
+  }
+
+  .gradient-cyber-hover {
+    background: linear-gradient(135deg, #2ee6c7 0%, #7d42e0 50%, #e00dd8 100%);
+  }
+
+  .gradient-text-cyber {
+    background: linear-gradient(135deg, #38fbdb 0%, #8e52f5 50%, #fc0ff5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-border-cyber {
+    position: relative;
+    background: hsl(var(--card));
+    border-radius: var(--radius);
+  }
+
+  .gradient-border-cyber::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    padding: 1px;
+    background: linear-gradient(135deg, #38fbdb 0%, #8e52f5 50%, #fc0ff5 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Glassmorphism - Cyber Slate style */
+  .glass {
+    background: rgba(18, 44, 90, 0.6);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(56, 251, 219, 0.15);
+  }
+
+  .glass-card {
+    background: rgba(12, 30, 62, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(56, 251, 219, 0.1);
+  }
+
+  .glass-light {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(104, 115, 135, 0.2);
+  }
+
+  @media (prefers-color-scheme: light) {
+    .glass {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(104, 115, 135, 0.2);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(104, 115, 135, 0.15);
+    }
+  }
+
+  /* Premium cyber shadows */
+  .shadow-cyber {
+    box-shadow:
+      0 0 0 1px rgba(56, 251, 219, 0.1),
+      0 4px 12px -2px rgba(56, 251, 219, 0.15),
+      0 8px 24px -4px rgba(142, 82, 245, 0.1);
+  }
+
+  .shadow-cyber-lg {
+    box-shadow:
+      0 0 0 1px rgba(56, 251, 219, 0.1),
+      0 8px 24px -4px rgba(56, 251, 219, 0.2),
+      0 16px 48px -8px rgba(142, 82, 245, 0.15);
+  }
+
+  .shadow-cyber-glow {
+    box-shadow:
+      0 0 20px rgba(56, 251, 219, 0.3),
+      0 0 40px rgba(142, 82, 245, 0.2),
+      0 0 60px rgba(252, 15, 245, 0.1);
+  }
+
+  /* Card depth effect - Cyber style */
+  .card-elevated {
+    box-shadow:
+      0 1px 2px 0 rgba(0, 0, 0, 0.2),
+      0 4px 8px -2px rgba(0, 0, 0, 0.25),
+      0 12px 24px -6px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(56, 251, 219, 0.05);
+  }
+
+  .card-elevated-xl {
+    box-shadow:
+      0 1px 3px 0 rgba(0, 0, 0, 0.2),
+      0 8px 20px -4px rgba(0, 0, 0, 0.3),
+      0 24px 48px -12px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(56, 251, 219, 0.08);
+  }
+
+  @media (prefers-color-scheme: light) {
+    .shadow-cyber {
+      box-shadow:
+        0 0 0 1px rgba(56, 251, 219, 0.2),
+        0 4px 12px -2px rgba(0, 0, 0, 0.08),
+        0 8px 24px -4px rgba(142, 82, 245, 0.1);
+    }
+    .shadow-cyber-lg {
+      box-shadow:
+        0 0 0 1px rgba(56, 251, 219, 0.15),
+        0 8px 24px -4px rgba(0, 0, 0, 0.1),
+        0 16px 48px -8px rgba(142, 82, 245, 0.08);
+    }
+    .card-elevated {
+      box-shadow:
+        0 1px 3px 0 rgba(0, 0, 0, 0.04),
+        0 4px 8px -2px rgba(0, 0, 0, 0.06),
+        0 12px 24px -6px rgba(0, 0, 0, 0.08);
+    }
+    .card-elevated-xl {
+      box-shadow:
+        0 1px 3px 0 rgba(0, 0, 0, 0.04),
+        0 8px 20px -4px rgba(0, 0, 0, 0.08),
+        0 24px 48px -12px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+/* Chat window entrance animation */
+@keyframes chat-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-chat-in {
+  animation: chat-slide-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Pulsing animation for chat trigger */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #38fbdb 0%, #8e52f5 50%, #fc0ff5 100%);
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  z-index: -1;
+}
+
+/* Tool execution pulse */
+@keyframes tool-pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(56, 251, 219, 0.5);
+  }
+  50% {
+    opacity: 0.85;
+    box-shadow: 0 0 0 10px rgba(56, 251, 219, 0);
+  }
+}
+
+.animate-tool-pulse {
+  animation: tool-pulse 1.5s ease-in-out infinite;
+}
+
+/* MCP Processing shimmer */
+@keyframes mcp-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-mcp-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(56, 251, 219, 0.1) 0%,
+    rgba(142, 82, 245, 0.3) 25%,
+    rgba(252, 15, 245, 0.3) 50%,
+    rgba(142, 82, 245, 0.3) 75%,
+    rgba(56, 251, 219, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: mcp-shimmer 2s linear infinite;
+}
+
+/* Smooth backdrop blur transition */
+.backdrop-blur-transition {
+  transition: backdrop-filter 0.3s ease, background-color 0.3s ease;
+}
+
+/* Premium button hover effect */
+.btn-cyber {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-cyber::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-cyber:hover::before {
+  left: 100%;
+}
+
+/* Scrollbar styling - Cyber Slate */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38fbdb 0%, #8e52f5 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2ee6c7 0%, #7d42e0 100%);
+}
+
+/* Status badge animations */
+@keyframes status-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.status-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(56, 251, 219, 0.1) 0%,
+    rgba(56, 251, 219, 0.4) 50%,
+    rgba(56, 251, 219, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: status-shimmer 2s linear infinite;
+}
+
+/* Floating animation for icons */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Neon text glow */
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(56, 251, 219, 0.5), 0 0 20px rgba(56, 251, 219, 0.3);
+}
+
+.text-glow-purple {
+  text-shadow: 0 0 10px rgba(142, 82, 245, 0.5), 0 0 20px rgba(142, 82, 245, 0.3);
+}
+
+.text-glow-magenta {
+  text-shadow: 0 0 10px rgba(252, 15, 245, 0.5), 0 0 20px rgba(252, 15, 245, 0.3);
+}
+
+/* Border glow effect */
+.border-glow {
+  box-shadow: inset 0 0 0 1px rgba(56, 251, 219, 0.3);
+}
+
+.border-glow:hover {
+  box-shadow: inset 0 0 0 1px rgba(56, 251, 219, 0.6), 0 0 20px rgba(56, 251, 219, 0.2);
+}
+
+/* Typing indicator dots */
+@keyframes typing-bounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-4px);
+  }
+}
+
+.typing-dot {
+  animation: typing-bounce 1.4s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 300ms;
+}

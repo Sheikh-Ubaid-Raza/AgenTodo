@@ -10,7 +10,7 @@ description: Retrieve up-to-date, version-specific documentation and code exampl
 ### When to Activate
 1. User requests code generation using external libraries
 2. User asks about API usage, methods, or library features
-3. User mentions specific frameworks (Next.js, FastAPI, Better Auth, SQLModel, etc.)
+3. User mentions specific frameworks (Next.js, FastAPI,OpenAI Agents SDK, Better Auth, SQLModel, etc.)
 4. User needs setup instructions or configuration examples
 5. User adds "use context7" to their prompt
 

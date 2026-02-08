@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "agentodo.fullname" . }}-frontend
+  labels:
+    {{- include "agentodo.frontend.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.frontend.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "agentodo.frontend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "agentodo.frontend.labels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "agentodo.serviceAccountName" . }}
+      containers:
+        - name: frontend
+          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.frontend.health.port }}
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: {{ include "agentodo.fullname" . }}-secrets
+            - configMapRef:
+                name: {{ include "agentodo.fullname" . }}-frontend-config
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.frontend.health.path }}
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.frontend.health.path }}
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          {{- with .Values.frontend.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}

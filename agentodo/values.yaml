@@ -1,0 +1,53 @@
+# AgenTodo Helm Values
+# Multi-component deployment: backend (FastAPI) + frontend (Next.js)
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+# ── Backend (FastAPI) ──────────────────────────────────────────────
+backend:
+  replicaCount: 1
+  image:
+    repository: agentodo-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 8000
+  health:
+    path: /health
+    port: 8000
+  resources: {}
+
+# ── Frontend (Next.js) ─────────────────────────────────────────────
+frontend:
+  replicaCount: 1
+  image:
+    repository: agentodo-frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    port: 3000
+    nodePort: 30000
+  health:
+    path: /
+    port: 3000
+  env:
+    NEXT_PUBLIC_API_URL: "http://localhost:8000/api"
+    NEXT_PUBLIC_BETTER_AUTH_URL: "http://localhost:3000"
+  resources: {}
+
+# ── Secrets (all sensitive env vars) ───────────────────────────────
+secrets:
+  DATABASE_URL: ""
+  BETTER_AUTH_SECRET: ""
+  BETTER_AUTH_URL: ""
+  OPENROUTER_API_KEY: ""
+  MODEL_NAME: "qwen/qwen-2.5-7b-instruct"
