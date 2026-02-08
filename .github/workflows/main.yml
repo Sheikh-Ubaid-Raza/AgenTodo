@@ -1,0 +1,42 @@
+name: Deploy Backend to Hugging Face Spaces
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_SPACE_NAME: SheikhUbaidRaza/AgenTodo
+        run: |
+          # Configure git
+          git config --global user.email "ci@github.com"
+          git config --global user.name "GitHub Actions"
+
+          # Clone the HF Space repo
+          git clone https://HF_USERNAME:${HF_TOKEN}@huggingface.co/spaces/${HF_SPACE_NAME} hf-space
+
+          # Clear existing files in HF space (except .git)
+          cd hf-space
+          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
+
+          # Copy backend/ contents to HF space root
+          cp -r ../backend/* .
+
+          # Use the HF-specific Dockerfile
+          cp Dockerfile.hf Dockerfile
+
+          # Commit and push
+          git add -A
+          git diff --staged --quiet && echo "No changes to deploy" && exit 0
+          git commit -m "Deploy backend from ${GITHUB_SHA::7}"
+          git push
