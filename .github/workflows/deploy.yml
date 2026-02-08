@@ -16,7 +16,7 @@ jobs:
       - name: Deploy to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-          HF_SPACE: SheikhUbaidRaza/AgenTodo
+          HF_SPACE_NAME: SheikhUbaidRaza/AgenTodo
         run: |
           # Configure git
           git config --global user.email "ci@github.com"

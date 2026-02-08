@@ -107,4 +107,4 @@ async def root() -> dict:
 @app.get("/health", tags=["Health"])
 async def health_check() -> dict:
     """Health check endpoint for monitoring."""
-    return {"status": "healthy"}
+    return {"status": "healthy api"}
