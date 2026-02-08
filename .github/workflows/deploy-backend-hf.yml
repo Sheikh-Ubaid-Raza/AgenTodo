@@ -23,7 +23,7 @@ jobs:
           git config --global user.name "GitHub Actions"
 
           # Clone the HF Space repo
-          git clone https://HF_USER:${HF_TOKEN}@huggingface.co/spaces/${HF_SPACE} hf-space
+          git clone https://HF_USERNAME:${HF_TOKEN}@huggingface.co/spaces/${HF_SPACE_NAME} hf-space
 
           # Clear existing files in HF space (except .git)
           cd hf-space
