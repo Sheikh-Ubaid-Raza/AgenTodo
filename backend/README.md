@@ -1,3 +1,13 @@
+---
+title: AgenTodo Backend
+emoji: 🚀
+colorFrom: blue
+colorTo: slate
+sdk: docker
+pinned: false
+app_port: 7860
+---
+
 # Backend - Todo API
 
 FastAPI backend for the Todo application with SQLModel and Neon PostgreSQL.
